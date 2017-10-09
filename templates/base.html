@@ -1,22 +1,11 @@
-<!-- this is a boilerplate template, for re-using in all others -->
-
 <!doctype html>
     <html>
         <head>
             <title>{{title}}</title>
-       <style>
-  
-  
-            H1 {text-align: center; font-color: blue; font-style: strong; }
-            p { font-family: Verdana, Geneva, Tahoma, sans-serif; font-color: green; }
-            ul {list-style-type: none ;}
-        
-            a:visited {color: blue ;}
-            a:hover {color: purple; } 
-            a:selected {color: green}
-            .error{color: red; }
+       
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-                    </style> 
+                    
         </head>
         <body>
         <nav>   
@@ -25,8 +14,8 @@
         </nav>
     
 
-        {% block content %}   <!-- use keyword block to tell it, this is where content will go -->
+        {% block content %}   
         {% endblock %}
 
-    </body>
+        </body>
     </html>

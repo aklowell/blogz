@@ -17,19 +17,18 @@ class Blog(db.Model):
         self.title = title
         self.body = body
 
-# THAT HIS HTML TEMPLATE IS blog.html not blogs.html
 
 @app.route('/blog', methods=['POST','GET'])
 def index():
     if request.args:
         blog_id=request.args.get("id")
         blog=Blog.query.get(blog_id)
-#reqeust.form pulls from a post, but this is a query string
+
         return render_template('blogentry.html',blog=blog)
 
     else:
-        blogs=Blog.query.all()
-        return render_template('blogs.html',title="Build A Blog", blogs=blogs)
+        blogs=Blog.query.order_by(Blog.id.desc()).all()
+        return render_template('blogs.html', blogs=blogs)
 
 
 
