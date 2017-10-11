@@ -8,14 +8,36 @@
                     
         </head>
         <body>
-        <nav>   
-        <a href = "/blog">Main Blog Page</a> 
-        <a href="/newpost">Add a Blog Entry</a>
-        </nav>
-    
-
-        {% block content %}   
-        {% endblock %}
-
+                <div style='float: right'>
+                     <!--   {% if 'user' in session %}
+                          {{ session['user'] }} -->
+                          <form action="/logout" method="post">
+                            <input type="submit" value="Log Out" />
+                          </form>
+                       <!-- {% else %} -->
+                          <a href="login">Log In</a> 
+                    <!--     {% endif %} -->
+                      </div>
+                      <h2>
+                          <a href="/">Home</a>
+                          <a href='/blog'>All Posts</a>
+                          <a href='/newpost'>New Post</a>
+                      </h2>
+              
+                      {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                          <ul class=flashes>
+                            {% for message in messages %}
+                            <li>{{ message }}</li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                      {% endwith %}
+              
+                      {% block content %}
+                      {% endblock %}
+              
+               
+      
         </body>
     </html>
