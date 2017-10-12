@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>Add a Blog Entry</h1>
-    <form method = "post" >
+    <form method = "post" id = "blogform">
         <label>
             Title for your new blog:
             <input type="text" name = 'title' value="{{blog_title}}"/>
@@ -12,23 +12,17 @@
         
         <p class="error">{{ title_error }}</p>
             <br><br>
-    
+
+         <input type = "submit" value = "Add Entry" />   
+        </form>
         <label>
             Your new blog:
-           <input type="text" name = 'body' value="{{blog_body}}" style="height: 200px; width: 200px"; />
-       <p class="error">{{ body_error }}</p>
-        </label>
-
-        
-       <!-- <label>
-            Owner:
-            <input type = "text" name = "owner" value="{{owner}}" />
-            <p class ="error">{{owner_error}}</p>
-        </label> -->
+        <!--    <input type="text" name = 'body' value="{{blog_body}}" style="height: 200px; width: 200px"; />
+       <p class="error">{{ body_error }}</p> -->
+       <textarea rows = "10" cols ="50" name = 'body' value="{{blog_body}}" form="blogform"></textarea></label>
+            
+      <p class="error">{{ body_error }}</p>
         
         <br> 
-     
-        <input type = "submit" value = "Add Entry" />
-    </form>
     
 {% endblock %}
