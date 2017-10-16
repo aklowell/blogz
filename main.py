@@ -45,7 +45,6 @@ def require_login():
         return redirect('/login')
 
 
-
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method=='POST':
@@ -122,27 +121,46 @@ def signup():
 @app.route('/blog', methods=['POST','GET'])
 def all_blogs():
     if request.args:
+  #  .get("Blog.id"):
         blog_id=request.args.get("id")
         blog=Blog.query.get(blog_id)
-
-        return render_template('blogentry.html',blog=blog)
+        user_id=request.args.get("id")
+        owner=User.query.get(user_id)
+        blogs=Blog.query.filter_by(owner=owner).all()
+       # user=Blog.query.filter_by(owner_id=owner_id)
+       # user=Blog.query.get("owner")
+        return render_template('blogentry.html',blog=blog, blogs=blogs, owner=owner)
 
     else:
         blogs=Blog.query.order_by(Blog.id.desc()).all()
         return render_template('blogs.html', blogs=blogs)
 
 
+#def users_blogs():
+ #   if request.args.get("User.id"):
+        
+        #owner = User.query.filter_by(id=id)
+        #blogs = Blog.query.filter_by(owner=owner).all()
+# 
+        
+      #  query_param_url = "/user?id=" + str(user_id)
+
+        #return redirect(query_param_url)
+       #
+  #      return render_template('userentry.html', blogs=blogs, owner=owner)
+        
+
 @app.route('/', methods=['POST','GET'])
 def index():
-    if request.args:
-        user_id=request.args.get("id")
-        user=User.query.get(user_id)
+   # if request.args:
+ #       user_id=request.args.get("id")
+ #       user=User.query.get(user_id)
 
-        return render_template('index.html',user=user)
+ #       return render_template('userentry.html',user=user)
 
-    else:
-        users=User.query.order_by(User.username.asc()).all()
-        return render_template('index.html', users=users)
+ #   else:
+    users = User.query.order_by(User.username.asc()).all()
+    return render_template('index.html', users=users)
     
 
 @app.route('/newpost',methods=["POST", "GET"])

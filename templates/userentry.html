@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for blog in blogs %}
+
+<h1>User Blog Posts</h1>
+<h2>  <a href="/blog?id={{blog.id}}">{{blog.title}}</a></h2>
+<p>is this user entry or not</p>
+<p>{{blog.body}}</p>
+<!-- <div class = "tagline"> -->
+    <span>written by </span><a href="/blog?user={{user.id}}">{{user.username}}</a>
+</div>
+
+{% endfor %}
+{% endblock %}
+
