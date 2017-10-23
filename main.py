@@ -51,16 +51,17 @@ def login():
         username = request.form['username']
         password = request.form['password']
         verify=request.form['verify']
-
         existing_user=User.query.filter_by(username=username).first()
-        existing_pw=existing_user.password
-           
-        if password != existing_pw:
-            flash("Invalid password.")
-            return render_template('login.html')
 
         if not existing_user:
             flash("No such user - please create account")
+            return render_template('login.html')
+
+        
+        existing_pw=existing_user.password
+           
+        if existing_user and password != existing_pw:
+            flash("Invalid password.")
             return render_template('login.html')
 
         if verify != password:
