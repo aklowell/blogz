@@ -117,10 +117,10 @@ def signup():
 @app.route('/blog', methods = ["POST","GET"])
 def blog():
 
-    
+
     if request.args:
         blog_id=request.args.get("id")
-            
+        
         
 
         #blog_owner=Blog.query.get("owner_id")
