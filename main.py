@@ -53,6 +53,12 @@ def login():
         verify=request.form['verify']
 
         existing_user=User.query.filter_by(username=username).first()
+        existing_pw=existing_user.password
+           
+        if password != existing_pw:
+            flash("Invalid password.")
+            return render_template('login.html')
+
         if not existing_user:
             flash("No such user - please create account")
             return render_template('login.html')
@@ -65,7 +71,8 @@ def login():
             flash("User already logged in!")
             return render_template('login.html')
             
-        if verify == password and 'username' not in session:
+
+        if verify == password and password==existing_pw and 'username' not in session:
             session['username'] = username
             return redirect ('/newpost')
 
